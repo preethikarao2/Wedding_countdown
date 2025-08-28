@@ -13,12 +13,88 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET || 'your_api_secret'
 });
 
+// Load initial photos from photos.json
+const fs = require('fs');
+const path = require('path');
+
 // In-memory database for serverless environment
 const db = {
   photos: [],
   journal: [],
   subscriptions: []
 };
+
+// Try to load initial photos from photos.json
+try {
+  const photosPath = path.join(__dirname, '../data/photos.json');
+  if (fs.existsSync(photosPath)) {
+    const photosData = JSON.parse(fs.readFileSync(photosPath, 'utf8'));
+    db.photos = photosData.photos || [];
+    console.log(`Loaded ${db.photos.length} photos from photos.json`);
+  } else {
+    console.log('photos.json not found, starting with empty photos array');
+    
+    // Add sample photos from public/images directory
+    db.photos = [
+      {
+        id: 'sample1',
+        src: '/images/1.jpeg',
+        title: 'Our Special Moment ❤️',
+        date: '2025-06-21',
+        description: 'A beautiful memory together',
+        timestamp: Date.now()
+      },
+      {
+        id: 'sample2',
+        src: '/images/2.jpeg',
+        title: 'Forever Together',
+        date: '2025-06-20',
+        description: 'Our journey continues',
+        timestamp: Date.now()
+      },
+      {
+        id: 'sample3',
+        src: '/images/3.jpeg',
+        title: 'Choco 🥰',
+        date: '2025-08-20',
+        description: 'Every moment with you is special',
+        timestamp: Date.now()
+      }
+    ];
+    console.log('Added 3 sample photos from public/images directory');
+  }
+} catch (error) {
+  console.error('Error loading photos from photos.json:', error);
+  
+  // Add sample photos from public/images directory as fallback
+  db.photos = [
+    {
+      id: 'sample1',
+      src: '/images/1.jpeg',
+      title: 'Our Special Moment',
+      date: '2025-06-21',
+      description: 'A beautiful memory together',
+      timestamp: Date.now()
+    },
+    {
+      id: 'sample2',
+      src: '/images/2.jpeg',
+      title: 'Forever Together',
+      date: '2025-07-15',
+      description: 'Our journey continues',
+      timestamp: Date.now()
+    },
+    {
+      id: 'sample3',
+      src: '/images/3.jpeg',
+      title: 'Love Story',
+      date: '2025-08-20',
+      description: 'Every moment with you is special',
+      timestamp: Date.now()
+    }
+  ];
+  console.log('Added 3 sample photos from public/images directory as fallback');
+}
 
 const app = express();
 

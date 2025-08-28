@@ -1,27 +1,27 @@
 {
   "photos": [
     {
-      "id": "mevh5x0akolop",
-      "src": "/photos/mevh5x0akolop.jpeg",
-      "title": "Our special",
+      "id": "sample1",
+      "src": "/images/1.jpeg",
+      "title": "Our First ❤️",
       "date": "2025-06-21",
-      "description": "",
+      "description": "A beautiful memory together",
       "timestamp": 1756389843802
     },
     {
-      "id": "mevh6rqv60t1n",
-      "src": "/photos/mevh6rqv60t1n.jpeg",
+      "id": "sample2",
+      "src": "/images/2.jpeg",
       "title": "YOU-ME Bunnies",
       "date": "2025-06-21",
-      "description": "",
+      "description": "Our journey continues",
       "timestamp": 1756389883641
     },
     {
-      "id": "mevh7eop5wg2g",
-      "src": "/photos/mevh7eop5wg2g.jpeg",
+      "id": "sample3",
+      "src": "/images/3.jpeg",
       "title": "Choco 🥰",
       "date": "2025-08-20",
-      "description": "",
+      "description": "Every moment with you is special",
       "timestamp": 1756389913374
     }
   ]
