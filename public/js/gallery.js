@@ -67,19 +67,37 @@ async function savePhoto(photoData) {
       photoData.src = await compressImage(photoData.src);
     }
     
-    const response = await fetch('/.netlify/functions/api/photos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(photoData)
-    });
+    console.log('Saving photo to server...');
+    
+    // Try the simplified API path first
+    let response;
+    try {
+      response = await fetch('/api/photos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(photoData)
+      });
+    } catch (e) {
+      // If that fails, try the direct Netlify functions path
+      console.log('Trying direct Netlify functions path for saving...');
+      response = await fetch('/.netlify/functions/api/photos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(photoData)
+      });
+    }
     
     if (!response.ok) {
-      throw new Error(`Server responded with ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`Server responded with ${response.status}: ${errorText}`);
     }
     
     const savedPhoto = await response.json();
+    console.log('Photo saved successfully:', savedPhoto);
     return savedPhoto;
   } catch (error) {
     console.error('Error saving photo to server:', error);
@@ -90,12 +108,22 @@ async function savePhoto(photoData) {
 // Load photos from server
 async function loadPhotos() {
   try {
-    const response = await fetch('/.netlify/functions/api/photos');
+    // Try the simplified API path first (with our redirect)
+    let response;
+    try {
+      response = await fetch('/api/photos');
+    } catch (e) {
+      // If that fails, try the direct Netlify functions path
+      console.log('Trying direct Netlify functions path...');
+      response = await fetch('/.netlify/functions/api/photos');
+    }
+    
     if (!response.ok) {
       throw new Error(`Server responded with ${response.status}`);
     }
     
     journeyPhotos = await response.json();
+    console.log('Loaded photos:', journeyPhotos);
   } catch (error) {
     console.error('Error loading photos from server:', error);
     journeyPhotos = [];
@@ -381,21 +409,38 @@ async function editPhotoTitle(photoIndex) {
   if (newTitle === null) return; // User cancelled
   
   try {
-    // Update on server
-    const response = await fetch(`/.netlify/functions/api/photos/${photo.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ title: newTitle })
-    });
+    console.log('Updating photo title...');
+    
+    // Try the simplified API path first
+    let response;
+    try {
+      response = await fetch(`/api/photos/${photo.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: newTitle })
+      });
+    } catch (e) {
+      // If that fails, try the direct Netlify functions path
+      console.log('Trying direct Netlify functions path for updating...');
+      response = await fetch(`/.netlify/functions/api/photos/${photo.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: newTitle })
+      });
+    }
     
     if (!response.ok) {
-      throw new Error(`Server responded with ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`Server responded with ${response.status}: ${errorText}`);
     }
     
     // Update local data
     journeyPhotos[photoIndex].title = newTitle;
+    console.log('Photo title updated successfully');
     
     // Update UI
     const galleryItems = document.querySelectorAll('.gallery-item');
@@ -422,14 +467,28 @@ async function deletePhoto(photoIndex) {
   }
   
   try {
-    // Delete from server
-    const response = await fetch(`/.netlify/functions/api/photos/${photo.id}`, {
-      method: 'DELETE'
-    });
+    console.log('Deleting photo...');
+    
+    // Try the simplified API path first
+    let response;
+    try {
+      response = await fetch(`/api/photos/${photo.id}`, {
+        method: 'DELETE'
+      });
+    } catch (e) {
+      // If that fails, try the direct Netlify functions path
+      console.log('Trying direct Netlify functions path for deleting...');
+      response = await fetch(`/.netlify/functions/api/photos/${photo.id}`, {
+        method: 'DELETE'
+      });
+    }
     
     if (!response.ok) {
-      throw new Error(`Server responded with ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`Server responded with ${response.status}: ${errorText}`);
     }
+    
+    console.log('Photo deleted successfully');
     
     // Remove from array
     journeyPhotos.splice(photoIndex, 1);

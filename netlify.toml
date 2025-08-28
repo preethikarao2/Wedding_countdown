@@ -8,6 +8,19 @@
   port = 3000
   publish = "public"
 
+# API redirects
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Serve images directly
+[[redirects]]
+  from = "/images/*"
+  to = "/images/:splat"
+  status = 200
+
+# Fallback for SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"
