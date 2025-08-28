@@ -44,8 +44,19 @@ Alternatively, you can deploy directly from the Netlify website:
 ### Important Notes for Deployment
 
 - The app uses serverless functions for backend functionality
-- Photos are stored in the `data/photos` directory
+- Photos are stored in Cloudinary cloud storage
 - Make sure to set up environment variables in the Netlify dashboard
+
+### Setting Up Cloudinary for Photo Storage
+
+1. Create a free Cloudinary account at [cloudinary.com](https://cloudinary.com/)
+2. From your Cloudinary dashboard, get your Cloud Name, API Key, and API Secret
+3. Add these as environment variables in your Netlify dashboard:
+   - `CLOUDINARY_CLOUD_NAME`
+   - `CLOUDINARY_API_KEY`
+   - `CLOUDINARY_API_SECRET`
+
+This ensures your photos are properly stored in the cloud and accessible from your deployed site.
 4. Run `npm start` to start the server
 5. Open the web application in your browser at http://localhost:3000
 6. Enter both email addresses to receive daily notifications
