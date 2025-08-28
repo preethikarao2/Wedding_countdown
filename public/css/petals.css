@@ -1,0 +1,104 @@
+/* Falling petals animation styles */
+
+.petals-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -20px;
+  border-radius: 50% 0 50% 0;
+  background-color: #ffcad4;
+  opacity: 0.7;
+  animation: fallingPetal linear forwards;
+}
+
+@keyframes fallingPetal {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(25vh) rotate(90deg) translateX(10px) scale(0.9);
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(-10px) scale(0.8);
+  }
+  75% {
+    transform: translateY(75vh) rotate(270deg) translateX(10px) scale(0.7);
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(-10px) scale(0.6);
+    opacity: 0;
+  }
+}
+
+/* Special celebration effects */
+.special-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.celebration-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 2rem;
+  font-family: 'Dancing Script', cursive;
+  color: var(--primary-color);
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s infinite;
+}
+
+.celebration-confetti {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-color);
+  animation: celebrationConfetti linear forwards;
+}
+
+@keyframes celebrationConfetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+/* Wedding day specific styles */
+.wedding-effect .celebration-message {
+  background: linear-gradient(135deg, #fff, #fff8f8);
+  border: 2px solid var(--primary-color);
+}
+
+/* Engagement day specific styles */
+.engagement-effect .celebration-message {
+  background: linear-gradient(135deg, #fff, #f8fffc);
+  border: 2px solid var(--secondary-color);
+}

@@ -1,0 +1,28 @@
+{
+  "photos": [
+    {
+      "id": "mevh5x0akolop",
+      "src": "/photos/mevh5x0akolop.jpeg",
+      "title": "Our special",
+      "date": "2025-06-21",
+      "description": "",
+      "timestamp": 1756389843802
+    },
+    {
+      "id": "mevh6rqv60t1n",
+      "src": "/photos/mevh6rqv60t1n.jpeg",
+      "title": "YOU-ME Bunnies",
+      "date": "2025-06-21",
+      "description": "",
+      "timestamp": 1756389883641
+    },
+    {
+      "id": "mevh7eop5wg2g",
+      "src": "/photos/mevh7eop5wg2g.jpeg",
+      "title": "Choco 🥰",
+      "date": "2025-08-20",
+      "description": "",
+      "timestamp": 1756389913374
+    }
+  ]
+}

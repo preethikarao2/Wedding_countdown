@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Countdown</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/petals.css">
+    <link rel="stylesheet" href="css/journal.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Our Wedding Journey</h1>
+            <p class="names">Preethika & Sangeeth</p>
+        </header>
+        
+        <div class="countdown-container">
+            <div class="event-countdown">
+                <h2>Engagement</h2>
+                <p class="date">October 16, 2025</p>
+                <div class="countdown" id="engagement-countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="engagement-days">--</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="engagement-hours">--</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="engagement-minutes">--</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="engagement-seconds">--</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="event-countdown">
+                <h2>Wedding</h2>
+                <p class="date">November 1, 2025</p>
+                <div class="countdown" id="wedding-countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="wedding-days">--</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="wedding-hours">--</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="wedding-minutes">--</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="wedding-seconds">--</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="daily-message-section">
+            <div class="message-card">
+                    <p id="daily-message">Loading your special message...</p>
+                </div>
+            <button id="refresh-message" class="btn">New Message <i class="heart-icon">❤️</i></button>
+        </div>
+        
+        <div class="gallery-section">
+            <h2>Our Journey Together</h2>
+            <p>Add your favorite photos to create a beautiful memory collection</p>
+            
+            <!-- Gallery container at the top to show existing photos -->
+            <div class="gallery-container">
+                <!-- Gallery items will be added by JavaScript -->
+            </div>
+            
+            <h3 class="add-photo-heading">Add a New Memory</h3>
+            <div class="photo-upload-container">
+                <form id="photo-upload-form" class="photo-upload-form">
+                    <div class="form-group">
+                        <label for="photo-title">Photo Title:</label>
+                        <input type="text" id="photo-title" class="photo-input" placeholder="Enter a title for your photo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo-date">Date Taken:</label>
+                        <input type="date" id="photo-date" class="photo-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo-description">Description:</label>
+                        <textarea id="photo-description" class="photo-textarea" placeholder="Share the story behind this moment..."></textarea>
+                    </div>
+                    <div class="form-group photo-upload-area">
+                        <label for="photo-file">Choose Photo:</label>
+                        <input type="file" id="photo-file" class="photo-file-input" accept="image/*" required>
+                        <div class="photo-preview" id="photo-preview">
+                            <p>Preview will appear here</p>
+                        </div>
+                    </div>
+                    <button type="submit" id="save-photo-button" class="btn photo-btn">Add to Our Journey</button>
+                </form>
+            </div>
+        </div>
+        
+
+        
+        <footer>
+            <p>With love, on the journey to forever ❤️</p>
+        </footer>
+    </div>
+    
+    <script src="js/app.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/petals.js"></script>
+    <script src="js/journal.js"></script>
+    <script src="js/email-notifications.js"></script>
+    
+    <!-- Animated background elements -->
+    <div class="animated-background"></div>
+</body>
+</html>
