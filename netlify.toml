@@ -8,7 +8,13 @@
   port = 3000
   publish = "public"
 
-# API redirects
+# Function redirects - this is the most important redirect
+[[redirects]]
+  from = "/.netlify/functions/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# API redirects - this is a convenience redirect
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"

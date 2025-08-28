@@ -69,10 +69,11 @@ async function savePhoto(photoData) {
     
     console.log('Saving photo to server...');
     
-    // Try the simplified API path first
+    // Try the direct Netlify functions path first (most reliable)
     let response;
     try {
-      response = await fetch('/api/photos', {
+      console.log('Using direct Netlify functions path for saving...');
+      response = await fetch('/.netlify/functions/api/photos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -80,9 +81,9 @@ async function savePhoto(photoData) {
         body: JSON.stringify(photoData)
       });
     } catch (e) {
-      // If that fails, try the direct Netlify functions path
-      console.log('Trying direct Netlify functions path for saving...');
-      response = await fetch('/.netlify/functions/api/photos', {
+      // If that fails, try the simplified API path
+      console.log('Direct path failed, trying simplified API path for saving...');
+      response = await fetch('/api/photos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -108,14 +109,15 @@ async function savePhoto(photoData) {
 // Load photos from server
 async function loadPhotos() {
   try {
-    // Try the simplified API path first (with our redirect)
+    // Try the direct Netlify functions path first (most reliable)
     let response;
     try {
-      response = await fetch('/api/photos');
-    } catch (e) {
-      // If that fails, try the direct Netlify functions path
-      console.log('Trying direct Netlify functions path...');
+      console.log('Fetching photos from direct Netlify functions path...');
       response = await fetch('/.netlify/functions/api/photos');
+    } catch (e) {
+      // If that fails, try the simplified API path
+      console.log('Direct path failed, trying simplified API path...');
+      response = await fetch('/api/photos');
     }
     
     if (!response.ok) {
@@ -411,10 +413,11 @@ async function editPhotoTitle(photoIndex) {
   try {
     console.log('Updating photo title...');
     
-    // Try the simplified API path first
+    // Try the direct Netlify functions path first (most reliable)
     let response;
     try {
-      response = await fetch(`/api/photos/${photo.id}`, {
+      console.log('Using direct Netlify functions path for updating...');
+      response = await fetch(`/.netlify/functions/api/photos/${photo.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -422,9 +425,9 @@ async function editPhotoTitle(photoIndex) {
         body: JSON.stringify({ title: newTitle })
       });
     } catch (e) {
-      // If that fails, try the direct Netlify functions path
-      console.log('Trying direct Netlify functions path for updating...');
-      response = await fetch(`/.netlify/functions/api/photos/${photo.id}`, {
+      // If that fails, try the simplified API path
+      console.log('Direct path failed, trying simplified API path for updating...');
+      response = await fetch(`/api/photos/${photo.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -469,16 +472,17 @@ async function deletePhoto(photoIndex) {
   try {
     console.log('Deleting photo...');
     
-    // Try the simplified API path first
+    // Try the direct Netlify functions path first (most reliable)
     let response;
     try {
-      response = await fetch(`/api/photos/${photo.id}`, {
+      console.log('Using direct Netlify functions path for deleting...');
+      response = await fetch(`/.netlify/functions/api/photos/${photo.id}`, {
         method: 'DELETE'
       });
     } catch (e) {
-      // If that fails, try the direct Netlify functions path
-      console.log('Trying direct Netlify functions path for deleting...');
-      response = await fetch(`/.netlify/functions/api/photos/${photo.id}`, {
+      // If that fails, try the simplified API path
+      console.log('Direct path failed, trying simplified API path for deleting...');
+      response = await fetch(`/api/photos/${photo.id}`, {
         method: 'DELETE'
       });
     }
